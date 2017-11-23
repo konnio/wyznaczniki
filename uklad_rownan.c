@@ -1,33 +1,39 @@
 #include <stdio.h>
 #include <math.h>
-int wczytaj_wspolczynniki (int a1, int b1, int c1, int a2, int b2, int c2)
+
+void wczytaj (double *a1, double *b1, double *c1, double *a2, double *b2, double *c2) //* oznacza ze zmienne moga byc edytowalne
 {
-printf("Podaj wspolczynniki pierwszego rownania\n");
-printf("Podaj wspolczynnik a1 "); scanf("%i" , &a1);
-printf("Podaj wspolczynnik b1 "); scanf("%i" , &b1);
-printf("Podaj wspolczynnik c1 "); scanf("%i" , &c1);
-printf("Podaj wspolczynniki drugiego rownania \n");
-printf("Podaj wspolczynnik a2 "); scanf("%i" , &a2);
-printf("Podaj wspolczynnik b2 "); scanf("%i" , &b2);
-printf("Podaj wspolczynnik c2 "); scanf("%i" , &c2);
-return (a1, b1, c1, a2, b2, c2);
+	puts("Podaj wspolczynnik a1: "); scanf("%lf", a1);  //%lf dla zmiennych double
+	puts("Podaj wspolczynnik b1: "); scanf("%lf", b1);  //%ld dla zmiennych long int
+	puts("Podaj wspolczynnik c1: "); scanf("%lf", c1);
+	puts("Podaj wspolczynnik a2: "); scanf("%lf", a2);
+	puts("Podaj wspolczynnik b2: "); scanf("%lf", b2);
+	puts("Podaj wspolczynnik c2: "); scanf("%lf", c2);
 }
 
-int oblicz_wyznaczniki_glowny (int w, int a1, int b1, int a2, int b2)
-{
-w = a1*b2 - b1* a2;
-return w;
+double wyznacznik_glowny (double a1, double a2, double b1, double b2) {
+	return a1*b2 - b1*a2;
 }
 
-int oblicz_wyznaczniki_glowny (int w, int a1, int b1, int a2, int b2)
-{
-w = a1*b2 - b1* a2;
-return w;
+double wyznacznik_x (double b1, double b2, double c1, double c2) {
+	return c1*b2 - b1*c2;
+}
+
+double wyznacznik_y (double a1, double a2, double c1, double c2) {
+	return a1*c2 - c1*a2;
 }
 
 
-
-
-
-float a1, b1, c1, a2, b2, c2, x, y
-
+int main () {
+// jezeli long int do %ld
+// jezeli double to %lf
+	double a1, b1, c1, a2, b2, c2;
+	double W, Wx, Wy, x, y;
+	wczytaj(&a1, &b1, &c1, &a2, &b2, &c2);
+	W = wyznacznik_glowny (a1, b1, a2, b2);
+	Wx = wyznacznik_x (b1, b2, c1, c2);
+	Wy = wyznacznik_y (a1, a2, c1, c2);
+	x = Wx/W;
+	y = Wy/W;
+	return 0;
+}
